@@ -5,3 +5,7 @@ Initial release. Introduce Dimension/Length class.
 ## 0.0.2
 
 Build doc. 
+
+## 0.0.3
+
+Build doc. 
