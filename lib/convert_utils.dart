@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'dimension.dart';
 
 extension DoubleRoundingExtension on double {
@@ -17,7 +18,6 @@ extension DoubleRoundingExtension on double {
   double percentToAlignmentValue() {
     return this / 100 * 2 - 1.0;
   }
-
 }
 
 extension DoubleToLengthExtension on double {

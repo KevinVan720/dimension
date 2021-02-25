@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dimension.dart';
 import 'package:flutter_class_parser/to_json.dart';
+
+import 'dimension.dart';
 
 class DynamicEdgeInsets {
   final Dimension? top;
@@ -54,17 +55,21 @@ class DynamicEdgeInsets {
 
   EdgeInsets toEdgeInsets(
       {required Size constraintSize, required Size screenSize}) {
-    double top = this.top?.toPX(
-            constraint: constraintSize.height, screenSize: screenSize) ??
+    double top = this
+            .top
+            ?.toPX(constraint: constraintSize.height, screenSize: screenSize) ??
         0.0;
-    double bottom = this.bottom?.toPX(
-            constraint: constraintSize.height, screenSize: screenSize) ??
+    double bottom = this
+            .bottom
+            ?.toPX(constraint: constraintSize.height, screenSize: screenSize) ??
         0.0;
-    double left = this.left?.toPX(
-            constraint: constraintSize.width, screenSize: screenSize) ??
+    double left = this
+            .left
+            ?.toPX(constraint: constraintSize.width, screenSize: screenSize) ??
         0.0;
-    double right = this.right?.toPX(
-            constraint: constraintSize.width, screenSize: screenSize) ??
+    double right = this
+            .right
+            ?.toPX(constraint: constraintSize.width, screenSize: screenSize) ??
         0.0;
     return EdgeInsets.only(
       left: left,

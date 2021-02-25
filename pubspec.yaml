@@ -1,9 +1,9 @@
 name: dimension
 description: >-
-  A Flutter package that introduce the Dimension/Length class.
-  It mimics the css length unit and supports four unit including px, percentage, vw and vh.
-  You can also add/subtract, use min, max, clamp on those Length.
-version: 0.0.1
+  A Flutter package that introduce the Dimension class.
+  It mimics the css length unit and supports four unit
+  including px, percentage, vw and vh.
+version: 0.0.2
 repository: https://github.com/KevinVan720/dimension
 
 environment:
@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_class_parser: ^0.0.4
+  flutter_class_parser: ^0.0.9
 
 dev_dependencies:
   flutter_test:

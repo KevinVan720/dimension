@@ -1,7 +1,6 @@
-import 'dynamic_offset.dart';
 import 'dimension.dart';
 import 'dynamic_edge_insets.dart';
-
+import 'dynamic_offset.dart';
 
 Length? parseLength(String? string) {
   return Length.fromJson(string);
@@ -13,7 +12,6 @@ DynamicOffset? parseDynamicOffset(Map<String, dynamic>? map) {
   Dimension dy = parseDimension(map['dy']) ?? Length(0);
   return DynamicOffset(dx, dy);
 }
-
 
 DynamicEdgeInsets? parseDynamicEdgeInsets(Map<String, dynamic>? map) {
   if (map == null) return null;

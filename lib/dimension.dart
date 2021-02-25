@@ -1,16 +1,20 @@
 library dimension;
 
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'convert_utils.dart';
 import 'parse_json.dart';
 
 export 'convert_utils.dart';
-export 'dynamic_offset.dart';
 export 'dynamic_edge_insets.dart';
+export 'dynamic_offset.dart';
 export 'parse_json.dart';
 
+///Base class of Dimension. Convert to actual px value by calling
+///the toPX function.
 abstract class Dimension {
   const Dimension();
 
@@ -105,6 +109,8 @@ LengthUnit? parseLengthUnit(String? unit) {
   return lengthUnitMap[unit];
 }
 
+///This is the one actually used by users.
+///Contains a value and a unit
 class Length extends Dimension {
   final double value;
   final LengthUnit unit;
@@ -123,18 +129,17 @@ class Length extends Dimension {
     }
   }
 
+  String getUnit() {
+    if (unit == LengthUnit.percent) return "%";
+    return unit.toString().substring(11);
+  }
+
   String toJson() {
-    if (unit == LengthUnit.percent) return value.toString() + "\%";
-    return value.toString() + unit.toString().substring(11);
+    return value.toString() + getUnit();
   }
 
   Length scale(double t) {
     return Length(value * t, unit: unit);
-  }
-
-  String getUnit() {
-    if (unit == LengthUnit.percent) return "%";
-    return unit.toString().substring(11);
   }
 
   double toPX({double? constraint, Size? screenSize}) {
@@ -204,13 +209,13 @@ class Length extends Dimension {
   }
 }
 
+///compound dimension, basically a list of dimension values
 class _CompoundDimension extends Dimension {
   final List<Dimension> lengths;
   _CompoundDimension(this.lengths)
-      : assert(lengths != null),
-        assert(lengths.length >= 2),
+      : assert(lengths.length >= 2),
         assert(
-        !lengths.any((Dimension border) => border is _CompoundDimension));
+            !lengths.any((Dimension border) => border is _CompoundDimension));
 
   List<dynamic> toJson() {
     return lengths.map((e) => e.toJson()).toList();
@@ -225,7 +230,7 @@ class _CompoundDimension extends Dimension {
     list.forEach((element) {
       if (element is Length) {
         int index =
-        rst.indexWhere((e) => e is Length && e.unit == element.unit);
+            rst.indexWhere((e) => e is Length && e.unit == element.unit);
         if (index != -1) {
           rst[index] = Length((rst[index] as Length).value + element.value,
               unit: element.unit);
@@ -309,13 +314,14 @@ class _CompoundDimension extends Dimension {
   String toString() {
     return lengths
         .fold(
-        "",
+            "",
             (String previousString, element) =>
-        previousString + " + " + element.toString())
+                previousString + " + " + element.toString())
         .substring(3);
   }
 }
 
+///compare two dimension values and return one in the toPX call.
 abstract class _CompareDimension extends Dimension {
   final Dimension value1;
   final Dimension value2;
@@ -370,8 +376,7 @@ class _MinDimension extends _CompareDimension {
   }
 
   double toPX({double? constraint, Size? screenSize}) {
-    return min(
-        value1.toPX(constraint: constraint, screenSize: screenSize),
+    return min(value1.toPX(constraint: constraint, screenSize: screenSize),
         value2.toPX(constraint: constraint, screenSize: screenSize));
   }
 
@@ -411,8 +416,7 @@ class _MaxDimension extends _CompareDimension {
   }
 
   double toPX({double? constraint, Size? screenSize}) {
-    return max(
-        value1.toPX(constraint: constraint, screenSize: screenSize),
+    return max(value1.toPX(constraint: constraint, screenSize: screenSize),
         value2.toPX(constraint: constraint, screenSize: screenSize));
   }
 
@@ -433,7 +437,8 @@ class _MaxDimension extends _CompareDimension {
 }
 
 class DimensionTween extends Tween<Dimension?> {
-  DimensionTween({Dimension? begin, Dimension? end}): super(begin: begin, end: end);
+  DimensionTween({Dimension? begin, Dimension? end})
+      : super(begin: begin, end: end);
 
   @override
   Dimension? lerp(double t) {
