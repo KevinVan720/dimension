@@ -8,4 +8,8 @@ Build doc.
 
 ## 0.0.3
 
-Build doc. 
+Build doc.
+
+## 0.0.4
+
+Update dependence
