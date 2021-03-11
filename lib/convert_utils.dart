@@ -43,6 +43,14 @@ extension DoubleToLengthExtension on double {
   Length get toVHLength {
     return Length(this, unit: LengthUnit.vh);
   }
+
+  Length get toVMINLength {
+    return Length(this, unit: LengthUnit.vmin);
+  }
+
+  Length get toVMAXLength {
+    return Length(this, unit: LengthUnit.vmax);
+  }
 }
 
 extension IntToLengthExtension on int {
@@ -67,5 +75,13 @@ extension IntToLengthExtension on int {
 
   Length get toVHLength {
     return Length(this.toDouble(), unit: LengthUnit.vh);
+  }
+
+  Length get toVMINLength {
+    return Length(this.toDouble(), unit: LengthUnit.vmin);
+  }
+
+  Length get toVMAXLength {
+    return Length(this.toDouble(), unit: LengthUnit.vmax);
   }
 }

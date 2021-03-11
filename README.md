@@ -1,7 +1,7 @@
 # dimension
 
 A Flutter package that introduce the Dimension/Length class.
-It mimics the css length system and currently supports four units including px, percentage, vw and vh. The
+It mimics the css length system and currently supports four units including px, percentage, vw, vh, vmin, and vmax. The
 user would need to supply the constraint value and the screen size in order to get a px value
 from the Length class.
 

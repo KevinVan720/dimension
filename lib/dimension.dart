@@ -87,6 +87,12 @@ enum LengthUnit {
   ///percent of the screen height
   vh,
 
+  ///percent of the screen shortest side
+  vmin,
+
+  ///percent of the screen longest side
+  vmax,
+
   ///Aspect Ratio?
   //ar,
 
@@ -100,6 +106,8 @@ const Map<String, LengthUnit> lengthUnitMap = {
   "px": LengthUnit.px,
   "vh": LengthUnit.vh,
   "vw": LengthUnit.vw,
+  "vmin": LengthUnit.vmin,
+  "vmax": LengthUnit.vmax,
 };
 
 LengthUnit? parseLengthUnit(String? unit) {
@@ -152,6 +160,10 @@ class Length extends Dimension {
         return value / 100.0 * (screenSize?.width ?? 100.0);
       case LengthUnit.vh:
         return value / 100.0 * (screenSize?.height ?? 100.0);
+      case LengthUnit.vmin:
+        return value / 100.0 * (screenSize?.shortestSide ?? 100.0);
+      case LengthUnit.vmax:
+        return value / 100.0 * (screenSize?.longestSide ?? 100.0);
       default:
         return 0;
     }
@@ -179,6 +191,10 @@ class Length extends Dimension {
         return px / (screenSize?.width ?? 100.0) * 100.0;
       case LengthUnit.vh:
         return px / (screenSize?.height ?? 100.0) * 100.0;
+      case LengthUnit.vmin:
+        return px / (screenSize?.shortestSide ?? 100.0) * 100.0;
+      case LengthUnit.vmax:
+        return px / (screenSize?.longestSide ?? 100.0) * 100.0;
     }
   }
 
@@ -203,6 +219,10 @@ class Length extends Dimension {
         return value.roundWithPrecision(1).toString() + "%vw";
       case LengthUnit.vh:
         return value.roundWithPrecision(1).toString() + "%vh";
+      case LengthUnit.vmin:
+        return value.roundWithPrecision(1).toString() + "%vmin";
+      case LengthUnit.vmax:
+        return value.roundWithPrecision(1).toString() + "%vmax";
       default:
         return "";
     }

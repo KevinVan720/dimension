@@ -13,3 +13,7 @@ Build doc.
 ## 0.0.4
 
 Update dependence
+
+## 0.0.5
+
+Add vmin, vmax units
