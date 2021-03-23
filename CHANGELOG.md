@@ -17,3 +17,7 @@ Update dependence
 ## 0.0.5
 
 Add vmin, vmax units
+
+## 0.0.6
+
+Fix length lerp bugs

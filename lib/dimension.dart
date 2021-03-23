@@ -150,6 +150,24 @@ class Length extends Dimension {
     return Length(value * t, unit: unit);
   }
 
+  @override
+  Dimension? lerpFrom(Dimension? a, double t) {
+    if (a == null) return scale(t);
+    List<Dimension> lengths =
+        _CompoundDimension.combineLength([a.scale(1 - t), this.scale(t)]);
+    if (lengths.length == 1) return lengths.first;
+    return _CompoundDimension(lengths);
+  }
+
+  @override
+  Dimension? lerpTo(Dimension? b, double t) {
+    if (b == null) return scale(1.0 - t);
+    List<Dimension> lengths =
+        _CompoundDimension.combineLength([this.scale(1 - t), b.scale(t)]);
+    if (lengths.length == 1) return lengths.first;
+    return _CompoundDimension(lengths);
+  }
+
   double toPX({double? constraint, Size? screenSize}) {
     switch (unit) {
       case LengthUnit.px:
