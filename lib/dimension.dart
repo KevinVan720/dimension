@@ -41,6 +41,8 @@ abstract class Dimension {
 
   Dimension scale(double t);
 
+  bool get isAbsolute => true;
+
   static Dimension max(Dimension value1, Dimension value2) {
     return _MaxDimension(value1: value1, value2: value2);
   }
@@ -149,6 +151,8 @@ class Length extends Dimension {
   Length scale(double t) {
     return Length(value * t, unit: unit);
   }
+
+  bool get isAbsolute => unit != LengthUnit.percent;
 
   @override
   Dimension? lerpFrom(Dimension? a, double t) {
@@ -263,6 +267,8 @@ class _CompoundDimension extends Dimension {
     return _CompoundDimension(lengths.map((e) => e.scale(t)).toList());
   }
 
+  bool get isAbsolute => lengths.every((element) => element.isAbsolute);
+
   static List<Dimension> combineLength(List<Dimension> list) {
     List<Dimension> rst = [];
     list.forEach((element) {
@@ -371,6 +377,8 @@ abstract class _CompareDimension extends Dimension {
       "value2": value2.toJson(),
     };
   }
+
+  bool get isAbsolute => value1.isAbsolute && value2.isAbsolute;
 
   @override
   Dimension? lerpFrom(Dimension? a, double t) {

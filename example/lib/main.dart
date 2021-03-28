@@ -43,6 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
     endHeight = 50.toVHLength +
         10.toPercentLength -
         Dimension.min(4.toPercentLength, 40.toPXLength);
+/*
+    print(beginWidth.isAbsolute);
+    print(beginHeight.isAbsolute);
+
+    print(endWidth.isAbsolute);
+    print(endHeight.isAbsolute);
+
+ */
 
     return Scaffold(
       appBar: AppBar(

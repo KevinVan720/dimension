@@ -21,3 +21,7 @@ Add vmin, vmax units
 ## 0.0.6
 
 Fix length lerp bugs
+
+## 0.0.7
+
+Add isAbsolute value
