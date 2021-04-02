@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'dimension.dart';
 
 class DynamicOffset {
   /// Constructs an elliptical radius with the given radii.
   const DynamicOffset(this.dx, this.dy);
-
-  //DynamicOffset.fromJson(Map<String, dynamic> map): dx=Length.fromJson(map["dx"]), dy=Length.fromJson(map["dy"]);
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {};

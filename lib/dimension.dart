@@ -41,7 +41,11 @@ abstract class Dimension {
 
   Dimension scale(double t);
 
+  ///does not depend on parent dimension (no % unit)
   bool get isAbsolute => true;
+
+  ///does not depend on viewport size (no VH,VW,VMIN,VMAX unit)
+  bool get isLocal => true;
 
   static Dimension max(Dimension value1, Dimension value2) {
     return _MaxDimension(value1: value1, value2: value2);
@@ -152,7 +156,15 @@ class Length extends Dimension {
     return Length(value * t, unit: unit);
   }
 
+  @override
   bool get isAbsolute => unit != LengthUnit.percent;
+
+  @override
+  bool get isLocal =>
+      unit != LengthUnit.vh &&
+      unit != LengthUnit.vw &&
+      unit != LengthUnit.vmin &&
+      unit != LengthUnit.vmax;
 
   @override
   Dimension? lerpFrom(Dimension? a, double t) {
@@ -254,10 +266,7 @@ class Length extends Dimension {
 ///compound dimension, basically a list of dimension values
 class _CompoundDimension extends Dimension {
   final List<Dimension> lengths;
-  _CompoundDimension(this.lengths)
-      : assert(lengths.length >= 2),
-        assert(
-            !lengths.any((Dimension border) => border is _CompoundDimension));
+  _CompoundDimension(this.lengths) : assert(lengths.length >= 2);
 
   List<dynamic> toJson() {
     return lengths.map((e) => e.toJson()).toList();
@@ -267,7 +276,11 @@ class _CompoundDimension extends Dimension {
     return _CompoundDimension(lengths.map((e) => e.scale(t)).toList());
   }
 
+  @override
   bool get isAbsolute => lengths.every((element) => element.isAbsolute);
+
+  @override
+  bool get isLocal => lengths.every((element) => element.isLocal);
 
   static List<Dimension> combineLength(List<Dimension> list) {
     List<Dimension> rst = [];
@@ -378,7 +391,11 @@ abstract class _CompareDimension extends Dimension {
     };
   }
 
+  @override
   bool get isAbsolute => value1.isAbsolute && value2.isAbsolute;
+
+  @override
+  bool get isLocal => value1.isLocal && value2.isLocal;
 
   @override
   Dimension? lerpFrom(Dimension? a, double t) {

@@ -25,3 +25,11 @@ Fix length lerp bugs
 ## 0.0.7
 
 Add isAbsolute value
+
+## 0.0.8
+
+Remove a false assert
+
+## 0.0.9
+
+Add isLocal value
