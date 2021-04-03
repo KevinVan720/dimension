@@ -6,11 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'convert_utils.dart';
-import 'parse_json.dart';
 
 export 'convert_utils.dart';
-export 'dynamic_edge_insets.dart';
-export 'dynamic_offset.dart';
 export 'parse_json.dart';
 
 ///Base class of Dimension. Convert to actual px value by calling
@@ -507,6 +504,10 @@ class DimensionTween extends Tween<Dimension?> {
   Dimension? lerp(double t) {
     return Dimension.lerp(begin, end, t);
   }
+}
+
+Length? parseLength(String? string) {
+  return Length.fromJson(string);
 }
 
 Dimension? parseDimension(dynamic input) {

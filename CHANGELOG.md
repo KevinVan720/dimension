@@ -33,3 +33,7 @@ Remove a false assert
 ## 0.0.9
 
 Add isLocal value
+
+## 0.1.0
+
+Remove DynamicEdgeInset, DynamicOffset
