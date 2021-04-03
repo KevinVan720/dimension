@@ -37,3 +37,7 @@ Add isLocal value
 ## 0.1.0
 
 Remove DynamicEdgeInset, DynamicOffset
+
+## 0.1.1
+
+Update path

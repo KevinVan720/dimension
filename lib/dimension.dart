@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'convert_utils.dart';
 
 export 'convert_utils.dart';
-export 'parse_json.dart';
 
 ///Base class of Dimension. Convert to actual px value by calling
 ///the toPX function.
