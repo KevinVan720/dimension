@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'dimension.dart';
+import '../dimension.dart';
 
 extension DoubleRoundingExtension on double {
   double roundWithPrecision(int N) {

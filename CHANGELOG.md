@@ -41,3 +41,7 @@ Remove DynamicEdgeInset, DynamicOffset
 ## 0.1.1
 
 Update path
+
+## 0.1.2
+
+Code restructure
