@@ -2,6 +2,8 @@ import 'dart:math';
 
 import '../dimension.dart';
 
+///extension for creating Length instance from double or int
+
 extension DoubleRoundingExtension on double {
   double roundWithPrecision(int N) {
     return (this * pow(10.0, N)).round() / pow(10.0, N);

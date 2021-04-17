@@ -1,12 +1,11 @@
 import 'dart:math';
 
+import 'package:dimension/dimension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'convert_utils.dart';
-
 ///Base class of Dimension. Convert to actual px value by calling
-///the toPX function.
+///the toPX() function and provide a constraint value and the screen size.
 abstract class Dimension {
   const Dimension();
 
@@ -70,49 +69,6 @@ abstract class Dimension {
     if (result == null && a != null) result = a.lerpTo(b, t);
     return result ?? (t < 0.5 ? a : b);
   }
-}
-
-enum LengthUnit {
-  ///logic pixel
-  px,
-
-  ///percent of the parent size
-  percent,
-
-  ///percent of the screen width
-  vw,
-
-  ///percent of the screen height
-  vh,
-
-  ///percent of the screen shortest side
-  vmin,
-
-  ///percent of the screen longest side
-  vmax,
-
-  ///Aspect Ratio?
-  //ar,
-
-  ///no constraint
-  //auto,
-
-}
-
-const Map<String, LengthUnit> lengthUnitMap = {
-  "\%": LengthUnit.percent,
-  "px": LengthUnit.px,
-  "vh": LengthUnit.vh,
-  "vw": LengthUnit.vw,
-  "vmin": LengthUnit.vmin,
-  "vmax": LengthUnit.vmax,
-};
-
-LengthUnit? parseLengthUnit(String? unit) {
-  if (unit == null || unit.trim().length == 0) {
-    return null;
-  }
-  return lengthUnitMap[unit];
 }
 
 ///This is the one actually used by users.
