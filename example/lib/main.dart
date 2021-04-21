@@ -36,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    beginWidth = Dimension.max(40.toPercentLength, 400.toPXLength);
-    beginHeight = (50.toVHLength - 10.toPXLength);
+    beginWidth = Dimension.max(20.toPercentLength, 700.toPXLength);
+    beginHeight = (90.toVHLength - 10.toPXLength);
 
     endWidth = Dimension.clamp(200.toPXLength, 40.toVWLength, 200.toPXLength);
     endHeight = 50.toVHLength +
@@ -56,56 +56,54 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
       ),
-      body: Center(
-        child: AnimatedContainer(
+      body: Container(
+        alignment: Alignment.center,
+        color: Colors.green,
+        child: AnimatedDimensionSizedBox(
           duration: Duration(seconds: 2),
-          color: Colors.amber,
-          width: toggle
-              ? beginWidth.toPX(
-                  constraint: screenSize.width, screenSize: screenSize)
-              : endWidth.toPX(
-                  constraint: screenSize.width, screenSize: screenSize),
-          height: toggle
-              ? beginHeight.toPX(
-                  constraint: screenSize.height, screenSize: screenSize)
-              : endHeight.toPX(
-                  constraint: screenSize.height, screenSize: screenSize),
-          child: DefaultTextStyle(
-              style: TextStyle(fontSize: 16, height: 1.5),
-              textAlign: TextAlign.center,
-              child: ListView(
-                children: [
-                  Text("Screen Size: " + screenSize.toString()),
-                  Text("Begin Width: " + beginWidth.toString()),
-                  Text("End Width: " + endWidth.toString()),
-                  Text("Begin Width in PX: " +
-                      beginWidth
-                          .toPX(
-                              constraint: screenSize.width,
-                              screenSize: screenSize)
-                          .toString() +
-                      ", End Width in PX: " +
-                      endWidth
-                          .toPX(
-                              constraint: screenSize.width,
-                              screenSize: screenSize)
-                          .toString()),
-                  Text("Begin Height: " + beginHeight.toString()),
-                  Text("End Height: " + endHeight.toString()),
-                  Text("Begin Height in PX: " +
-                      beginHeight
-                          .toPX(
-                              constraint: screenSize.height,
-                              screenSize: screenSize)
-                          .toString() +
-                      ", End Height in PX: " +
-                      endHeight
-                          .toPX(
-                              constraint: screenSize.height,
-                              screenSize: screenSize)
-                          .toString()),
-                ],
-              )),
+          width: toggle ? beginWidth : endWidth,
+          height: toggle ? beginHeight : endHeight,
+          child: Container(
+            alignment: Alignment.topCenter,
+            color: Colors.amberAccent,
+            child: DefaultTextStyle(
+                style: TextStyle(fontSize: 16, height: 1.5),
+                textAlign: TextAlign.center,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Screen Size: " + screenSize.toString()),
+                    Text("Begin Width: " + beginWidth.toString()),
+                    Text("End Width: " + endWidth.toString()),
+                    Text("Begin Width in PX: " +
+                        beginWidth
+                            .toPX(
+                                constraint: screenSize.width,
+                                screenSize: screenSize)
+                            .toString() +
+                        ", End Width in PX: " +
+                        endWidth
+                            .toPX(
+                                constraint: screenSize.width,
+                                screenSize: screenSize)
+                            .toString()),
+                    Text("Begin Height: " + beginHeight.toString()),
+                    Text("End Height: " + endHeight.toString()),
+                    Text("Begin Height in PX: " +
+                        beginHeight
+                            .toPX(
+                                constraint: screenSize.height,
+                                screenSize: screenSize)
+                            .toString() +
+                        ", End Height in PX: " +
+                        endHeight
+                            .toPX(
+                                constraint: screenSize.height,
+                                screenSize: screenSize)
+                            .toString()),
+                  ],
+                )),
+          ),
         ),
       ),
     );

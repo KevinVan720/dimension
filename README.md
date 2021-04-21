@@ -51,6 +51,25 @@ length=Dimension.clamp(10.toVWLength, 100.toPXLength, 20.toPercentLength);
 
 and those operations can be nested and combined.
 
+## DimensionSizedBox
+
+You can manually call the toPX() function on a dimension and provide the constraint and the
+screen size and get a px value. Or you can use the DimensionSizedBox:
+```dart
+const DimensionSizedBox({
+    Key? key,
+    this.width,
+    this.height,
+    Widget? child,
+  }) : super(key: key, child: child);
+
+  final Dimension? width;
+  final Dimension? height;
+```
+which is similar to SizedBox but accepts two Dimension instances.
+
+Notice if for example this widget has a unbound parent maxWidth and the width parameter depends on the parent (has a percent unit), the parent maxWidth will be clamped to the width of the screen. This ensures that this Box is always bounded unless you use something like Length(double.infinite).
+
 ## Serialization
 
 Any dimension instance can be serialized/deserializad.
