@@ -58,3 +58,7 @@ Code restructure
 
 DimensionSizedBox
 
+## 0.1.6
+
+Update license.
+

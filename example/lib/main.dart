@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         10.toPercentLength -
         Dimension.min(4.toPercentLength, 40.toPXLength);
 
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Dimension Demo"),
@@ -69,39 +70,51 @@ class _MyHomePageState extends State<MyHomePage> {
             child: DefaultTextStyle(
                 style: TextStyle(fontSize: 16, height: 1.5),
                 textAlign: TextAlign.center,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Screen Size: " + screenSize.toString()),
-                    Text("Begin Width: " + beginWidth.toString()),
-                    Text("End Width: " + endWidth.toString()),
-                    Text("Begin Width in PX: " +
-                        beginWidth
-                            .toPX(
-                                constraint: screenSize.width,
-                                screenSize: screenSize)
-                            .toString() +
-                        ", End Width in PX: " +
-                        endWidth
-                            .toPX(
-                                constraint: screenSize.width,
-                                screenSize: screenSize)
-                            .toString()),
-                    Text("Begin Height: " + beginHeight.toString()),
-                    Text("End Height: " + endHeight.toString()),
-                    Text("Begin Height in PX: " +
-                        beginHeight
-                            .toPX(
-                                constraint: screenSize.height,
-                                screenSize: screenSize)
-                            .toString() +
-                        ", End Height in PX: " +
-                        endHeight
-                            .toPX(
-                                constraint: screenSize.height,
-                                screenSize: screenSize)
-                            .toString()),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text("Screen Size: " + screenSize.toString()),
+                      Text("Begin Width: " + beginWidth.toString()),
+                      Text("End Width: " + endWidth.toString()),
+                      Text("Begin Width in PX: " +
+                          beginWidth
+                              .toPX(
+                                  constraint: screenSize.width,
+                                  screenSize: screenSize)
+                              .toString() +
+                          ", End Width in PX: " +
+                          endWidth
+                              .toPX(
+                                  constraint: screenSize.width,
+                                  screenSize: screenSize)
+                              .toString()),
+                      Text("Begin Height: " + beginHeight.toString()),
+                      Text("End Height: " + endHeight.toString()),
+                      Text("Begin Height in PX: " +
+                          beginHeight
+                              .toPX(
+                                  constraint: screenSize.height,
+                                  screenSize: screenSize)
+                              .toString() +
+                          ", End Height in PX: " +
+                          endHeight
+                              .toPX(
+                                  constraint: screenSize.height,
+                                  screenSize: screenSize)
+                              .toString()),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: DimensionSizedBox(
+                          width: 50.toPercentLength,
+                          height: 50.toPercentLength,
+                          child: Container(
+                            color: Colors.blue,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 )),
           ),
         ),
