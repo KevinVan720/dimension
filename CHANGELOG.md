@@ -62,3 +62,7 @@ DimensionSizedBox
 
 Update license.
 
+## 0.1.7
+
+Update dependency.
+

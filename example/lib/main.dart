@@ -27,10 +27,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool toggle = true;
 
-  Dimension beginWidth;
-  Dimension beginHeight;
-  Dimension endWidth;
-  Dimension endHeight;
+  late Dimension beginWidth;
+  late Dimension beginHeight;
+  late Dimension endWidth;
+  late Dimension endHeight;
 
   @override
   Widget build(BuildContext context) {
