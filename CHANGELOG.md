@@ -66,3 +66,7 @@ Update license.
 
 Update dependency.
 
+## 0.2.0
+
+Breaking change: Fix: Migrate use of hashValues to Object.hash api which has been the latest standard since Dart 2.14.0
+
