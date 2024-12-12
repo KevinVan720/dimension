@@ -3,18 +3,18 @@ description: >-
   A Flutter package that introduce the Dimension class.
   It mimics the css length unit and supports units
   like px, percentage, vw, vh, vmin ,and vmax.
-version: 0.1.7
+version: 0.2.0
 repository: https://github.com/KevinVan720/dimension
 
 environment:
-  sdk: ">=2.12.0 <4.0.0"
+  sdk: ">=2.14.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  flutter_class_parser: ^0.2.4
+  flutter_class_parser: ^0.2.5
 
 dev_dependencies:
   flutter_test:
