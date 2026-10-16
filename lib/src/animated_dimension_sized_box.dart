@@ -1,28 +1,42 @@
-import 'package:dimension/dimension.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
+import 'dimension.dart';
+import 'dimension_sized_box.dart';
+
+/// Animated version of [DimensionSizedBox] which automatically transitions
+/// the [width] and [height] over [duration] whenever they change.
 class AnimatedDimensionSizedBox extends ImplicitlyAnimatedWidget {
-  AnimatedDimensionSizedBox({
-    Key? key,
+  const AnimatedDimensionSizedBox({
+    super.key,
     this.width,
     this.height,
     this.child,
-    Curve curve = Curves.linear,
-    required Duration duration,
-    VoidCallback? onEnd,
-  }) : super(key: key, curve: curve, duration: duration, onEnd: onEnd);
+    super.curve,
+    required super.duration,
+    super.onEnd,
+  });
 
   final Dimension? width;
   final Dimension? height;
 
   /// The widget below this widget in the tree.
   ///
-  /// {@macro flutter.src.widgets.ProxyWidget.child}
+  /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget? child;
 
   @override
-  _AnimatedDimensionSizedBoxState createState() =>
+  AnimatedWidgetBaseState<AnimatedDimensionSizedBox> createState() =>
       _AnimatedDimensionSizedBoxState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<Dimension>('width', width, defaultValue: null))
+      ..add(
+          DiagnosticsProperty<Dimension>('height', height, defaultValue: null));
+  }
 }
 
 class _AnimatedDimensionSizedBoxState
@@ -43,9 +57,9 @@ class _AnimatedDimensionSizedBoxState
   @override
   Widget build(BuildContext context) {
     return DimensionSizedBox(
-      child: widget.child,
       width: _width?.evaluate(animation),
       height: _height?.evaluate(animation),
+      child: widget.child,
     );
   }
 }

@@ -70,3 +70,20 @@ Update dependency.
 
 Breaking change: Fix: Migrate use of hashValues to Object.hash api which has been the latest standard since Dart 2.14.0
 
+## [0.2.1]
+
+Support the latest Flutter stable (requires Dart 3.6 / Flutter 3.27 or newer).
+The package no longer depends on Material and only uses the Flutter widgets layer,
+so it works with apps using flutter/material.dart or the standalone material_ui package.
+
+Fixes:
+- Adding to or subtracting from a sum no longer modifies the original sum, and a sum can be added to itself.
+- Sums that collapse to a single unit (e.g. `1.toPXLength + 2.toPXLength + 3.toPXLength`) no longer throw an assertion error.
+- Interpolating between null and a min/max/clamp dimension no longer throws.
+- min/max/clamp scale and interpolate correctly with negative factors, so overshooting curves (e.g. `Curves.easeOutBack`) animate correctly.
+- DimensionSizedBox updates vw/vh/vmin/vmax values when the screen size changes.
+- DimensionSizedBox reports its width as intrinsic width and its height as intrinsic height (they were swapped).
+- Length parsing handles exponent notation (`1e-7px`), `Infinity`/`NaN`, numbers without a unit (read as px) and surrounding whitespace.
+- parseDimension no longer crashes on a min/max with a missing value or on unparseable list entries, reads numbers as px lengths, and also accepts a JSON encoded string.
+- Length.toString no longer throws for infinite or NaN values.
+- Repeated interpolation (interrupted animations) no longer nests sums.

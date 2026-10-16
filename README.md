@@ -1,7 +1,7 @@
 # dimension
 
 A Flutter package that introduce the Dimension/Length class.
-It mimics the css length system and currently supports four units including px, percentage, vw, vh, vmin, and vmax. The
+It mimics the css length system and currently supports six units: px, percentage, vw, vh, vmin, and vmax. The
 user would need to supply the constraint value and the screen size in order to get a px value
 from the Length class.
 
@@ -22,7 +22,7 @@ var length=Length(10.0, unit: LengthUnit.percent);
 Get the actual px value by calling:
 
 ```dart
-double px=length.toPX(constraint: 100, screenSize: MediaQuery.of(context).size);
+double px=length.toPX(constraint: 100, screenSize: MediaQuery.sizeOf(context));
 ```
 
 where the constraint you can get from the parent BoxConstraint and the screenSize you can get with
@@ -35,6 +35,8 @@ length=10.toPXLength; //10 px
 length=10.toPercentLength; // 10% of the parent constrant
 length=10.toVWLength; //10% of the screen width
 length=10.toVHLength; //10% of the screen height
+length=10.toVMINLength; //10% of the shorter side of the screen
+length=10.toVMAXLength; //10% of the longer side of the screen
 ```
 
 You can also add or subtract Length:
@@ -57,18 +59,30 @@ You can manually call the toPX() function on a dimension and provide the constra
 screen size and get a px value. Or you can use the DimensionSizedBox:
 ```dart
 const DimensionSizedBox({
-    Key? key,
+    super.key,
     this.width,
     this.height,
-    Widget? child,
-  }) : super(key: key, child: child);
+    super.child,
+  });
 
   final Dimension? width;
   final Dimension? height;
 ```
-which is similar to SizedBox but accepts two Dimension instances.
+which is similar to SizedBox but accepts two Dimension instances. The screen size is read from
+`MediaQuery.sizeOf(context)`, so the box updates when the screen size changes. The package only
+depends on the Flutter widgets layer, not on Material.
 
-Notice if for example this widget has a unbound parent maxWidth and the width parameter depends on the parent (has a percent unit), the parent maxWidth will be clamped to the width of the screen. This ensures that this Box is always bounded unless you use something like Length(double.infinite).
+Notice if for example this widget has a unbound parent maxWidth and the width parameter depends on the parent (has a percent unit), the parent maxWidth will be clamped to the width of the screen. This ensures that this Box is always bounded unless you use something like Length(double.infinity).
+
+Use AnimatedDimensionSizedBox to animate between two dimensions, even if they use different units:
+```dart
+AnimatedDimensionSizedBox(
+  duration: const Duration(seconds: 1),
+  width: toggle ? 50.toPercentLength : Dimension.max(200.toPXLength, 20.toVWLength),
+  height: 100.toPXLength,
+  child: child,
+)
+```
 
 ## Serialization
 
@@ -79,12 +93,9 @@ String jsonStr=json.encode(length.toJson());
 ```
 
 Then get back the dimension by calling:
+```dart
+Dimension? newLength=parseDimension(json.decode(jsonStr));
 ```
-Dimension newLength=parseDimension(jsonStr);
-```
+`parseDimension` also accepts the encoded `jsonStr` itself, and returns null for input that is not a dimension.
 
 See the example app for a real world application of this package.
-
-
-
-

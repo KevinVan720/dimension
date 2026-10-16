@@ -1,3 +1,4 @@
+/// The CSS-like unit of a `Length`.
 enum LengthUnit {
   ///logic pixel
   px,
@@ -16,27 +17,21 @@ enum LengthUnit {
 
   ///percent of the screen longest side
   vmax,
-
-  ///Aspect Ratio?
-  //ar,
-
-  ///no constraint
-  //auto,
-
 }
 
+/// The serialized symbol of each [LengthUnit].
 const Map<String, LengthUnit> lengthUnitMap = {
-  "\%": LengthUnit.percent,
-  "px": LengthUnit.px,
-  "vh": LengthUnit.vh,
-  "vw": LengthUnit.vw,
-  "vmin": LengthUnit.vmin,
-  "vmax": LengthUnit.vmax,
+  '%': LengthUnit.percent,
+  'px': LengthUnit.px,
+  'vh': LengthUnit.vh,
+  'vw': LengthUnit.vw,
+  'vmin': LengthUnit.vmin,
+  'vmax': LengthUnit.vmax,
 };
 
+/// Returns the [LengthUnit] for a symbol of [lengthUnitMap], ignoring
+/// surrounding whitespace, or null if [unit] is null or unknown.
 LengthUnit? parseLengthUnit(String? unit) {
-  if (unit == null || unit.trim().length == 0) {
-    return null;
-  }
-  return lengthUnitMap[unit];
+  if (unit == null) return null;
+  return lengthUnitMap[unit.trim()];
 }

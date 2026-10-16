@@ -2,10 +2,12 @@ import 'package:dimension/dimension.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -14,14 +16,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -34,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    final Size screenSize = MediaQuery.sizeOf(context);
 
     beginWidth = Dimension.max(20.toPercentLength, 700.toPXLength);
     beginHeight = (90.toVHLength - 10.toPXLength);
@@ -44,65 +48,53 @@ class _MyHomePageState extends State<MyHomePage> {
         10.toPercentLength -
         Dimension.min(4.toPercentLength, 40.toPXLength);
 
+    final double beginWidthPX =
+        beginWidth.toPX(constraint: screenSize.width, screenSize: screenSize);
+    final double endWidthPX =
+        endWidth.toPX(constraint: screenSize.width, screenSize: screenSize);
+    final double beginHeightPX =
+        beginHeight.toPX(constraint: screenSize.height, screenSize: screenSize);
+    final double endHeightPX =
+        endHeight.toPX(constraint: screenSize.height, screenSize: screenSize);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Dimension Demo"),
+        title: const Text('Dimension Demo'),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.refresh),
         onPressed: () {
           setState(() {
             toggle = !toggle;
           });
         },
+        child: const Icon(Icons.refresh),
       ),
       body: Container(
         alignment: Alignment.center,
         color: Colors.green,
         child: AnimatedDimensionSizedBox(
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
           width: toggle ? beginWidth : endWidth,
           height: toggle ? beginHeight : endHeight,
           child: Container(
             alignment: Alignment.topCenter,
             color: Colors.amberAccent,
             child: DefaultTextStyle(
-                style: TextStyle(fontSize: 16, height: 1.5),
+                style: const TextStyle(fontSize: 16, height: 1.5),
                 textAlign: TextAlign.center,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text("Screen Size: " + screenSize.toString()),
-                      Text("Begin Width: " + beginWidth.toString()),
-                      Text("End Width: " + endWidth.toString()),
-                      Text("Begin Width in PX: " +
-                          beginWidth
-                              .toPX(
-                                  constraint: screenSize.width,
-                                  screenSize: screenSize)
-                              .toString() +
-                          ", End Width in PX: " +
-                          endWidth
-                              .toPX(
-                                  constraint: screenSize.width,
-                                  screenSize: screenSize)
-                              .toString()),
-                      Text("Begin Height: " + beginHeight.toString()),
-                      Text("End Height: " + endHeight.toString()),
-                      Text("Begin Height in PX: " +
-                          beginHeight
-                              .toPX(
-                                  constraint: screenSize.height,
-                                  screenSize: screenSize)
-                              .toString() +
-                          ", End Height in PX: " +
-                          endHeight
-                              .toPX(
-                                  constraint: screenSize.height,
-                                  screenSize: screenSize)
-                              .toString()),
+                      Text('Screen Size: $screenSize'),
+                      Text('Begin Width: $beginWidth'),
+                      Text('End Width: $endWidth'),
+                      Text('Begin Width in PX: $beginWidthPX, '
+                          'End Width in PX: $endWidthPX'),
+                      Text('Begin Height: $beginHeight'),
+                      Text('End Height: $endHeight'),
+                      Text('Begin Height in PX: $beginHeightPX, '
+                          'End Height in PX: $endHeightPX'),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: DimensionSizedBox(
